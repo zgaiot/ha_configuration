@@ -1,0 +1,95 @@
+sensor:
+  # Xiaomi Air Purifier 2S
+  - platform: template
+    sensors:
+      xiaomi_airpurifier_temp:
+        friendly_name: "Temperature"
+        value_template: "{{ state_attr('fan.air_purifier', 'temperature') }}"
+        unit_of_measurement: "°C"
+        device_class: "temperature"
+      xiaomi_airpurifier_humidity:
+        friendly_name: "Humidity"
+        value_template: "{{ state_attr('fan.air_purifier', 'humidity') }}"
+        unit_of_measurement: "%"
+        device_class: "humidity"
+      xiaomi_airpurifier_air_quality_pm25:
+        friendly_name: "Air quality"
+        value_template: "{{ state_attr('fan.air_purifier', 'aqi') }}"
+        unit_of_measurement: "μg/m³"
+        icon_template: "mdi:weather-fog"
+      xiaomi_airpurifier_speed:
+        friendly_name: "Fan speed"
+        value_template: "{{ state_attr('fan.air_purifier', 'motor_speed') }}"
+        unit_of_measurement: "rpm"
+        icon_template: "mdi:speedometer"
+      xiaomi_airpurifier_filter_remaining:
+        friendly_name: "Filter remaining"
+        value_template: "{{ state_attr('fan.air_purifier', 'filter_life_remaining') }}"
+        unit_of_measurement: "%"
+        icon_template: "mdi:heart-outline"
+        
+switch:
+  # Xiaomi Air Purifier 2S
+  - platform: template
+    switches:
+      xiaomi_airpurifier_led:
+        friendly_name: "LED"
+        value_template: "{{ is_state_attr('fan.air_purifier', 'led', true) }}"
+        turn_on:
+          service: xiaomi_miio.fan_set_led_on
+          data:
+            entity_id: fan.xiaomi_miio_device
+        turn_off:
+          service: xiaomi_miio.fan_set_led_off
+          data:
+            entity_id: fan.xiaomi_miio_device
+        icon_template: "mdi:lightbulb-outline"
+      xiaomi_airpurifier_child_lock:
+        friendly_name: "Child lock"
+        value_template: "{{ is_state_attr('fan.air_purifier', 'child_lock', true) }}"
+        turn_on:
+          service: xiaomi_miio.fan_set_child_lock_on
+          data:
+            entity_id: fan.xiaomi_miio_device
+        turn_off:
+          service: xiaomi_miio.fan_set_child_lock_off
+          data:
+            entity_id: fan.xiaomi_miio_device
+        icon_template: "mdi:lock-outline"
+      xiaomi_airpurifier_buzzer:
+        friendly_name: "Buzzer"
+        value_template: "{{ is_state_attr('fan.air_purifier', 'buzzer', true) }}"
+        turn_on:
+          service: xiaomi_miio.fan_set_buzzer_on
+          data:
+            entity_id: fan.xiaomi_miio_device
+        turn_off:
+          service: xiaomi_miio.fan_set_buzzer_off
+          data:
+            entity_id: fan.xiaomi_miio_device
+        icon_template: "mdi:volume-high"
+      ewelink_virtual_switch:
+        turn_on:
+          service: switch.turn_on
+        turn_off:
+          service: switch.turn_off
+        
+input_select:
+  # Xiaomi Air Purifier 2S
+  xiaomi_airpurifier_mode:
+    name: Mode
+    options:
+      - Auto
+      - Silent
+      - Favorite
+    icon: "mdi:animation-outline"
+
+input_number:
+  # Xiaomi Air Purifier 2S
+  xiaomi_airpurifier_favorite_level:
+    name: "Favorite level"
+    initial: 0
+    min: 0
+    max: 14
+    step: 1
+    icon: "mdi:weather-windy"
