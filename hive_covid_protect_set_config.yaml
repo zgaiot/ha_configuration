@@ -1,0 +1,59 @@
+sensor:
+ - platform: mqtt
+    state_topic: "/ha/covid-protect-set/sensor-info"
+    name: "Body Temperature"
+    value_template: '{{ value_json.humTemp }}'
+    unit_of_measurement: "°C"
+        
+  - platform: mqtt
+    state_topic: "/ha/covid-protect-set/sensor-info"
+    name: "Environment Temperature"
+    value_template: '{{ value_json.airTemp }}'
+    unit_of_measurement: "°C"
+    
+  - platform: mqtt
+    state_topic: "/ha/covid-protect-set/sensor-info"
+    name: "Environment Humidity"
+    value_template: '{{ value_json.airHumd }}'
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    state_topic: "/ha/covid-protect-set/sensor-info"
+    name: "Body Distance"
+    value_template: '{{ value_json.humDistance }}'
+    unit_of_measurement: "mm"
+
+  - platform: mqtt
+    state_topic: "/ha/covid-protect-set/sensor-info"
+    name: "PM1.0"
+    value_template: '{{ value_json.airPM1_0 }}'
+    unit_of_measurement: "μg/m³"
+
+  - platform: mqtt
+    state_topic: "/ha/covid-protect-set/sensor-info"
+    name: "PM2.5"
+    value_template: '{{ value_json.airPM2_5 }}'
+    unit_of_measurement: "μg/m³"
+
+  - platform: mqtt
+    state_topic: "/ha/covid-protect-set/sensor-info"
+    name: "PM10.0"
+    value_template: '{{ value_json.airPM10 }}'
+    unit_of_measurement: "μg/m³"
+
+  - platform: mqtt
+    state_topic: "/ha/covid-protect-set/sensor-info"
+    name: "Environment O2"
+    value_template: '{{ value_json.airO2 }}'
+    unit_of_measurement: "ppm"
+
+  - platform: mqtt
+    state_topic: "/ha/covid-protect-set/sensor-info"
+    name: "Environment CO2"
+    value_template: '{{ value_json.airCO2 }}'
+    unit_of_measurement: "ppm"
+
+  - platform: mqtt
+    state_topic: "/ha/covid-protect-set/sensor-info"
+    name: "Radar Distance"
+    value_template: '{{ value_json.detection }}'
